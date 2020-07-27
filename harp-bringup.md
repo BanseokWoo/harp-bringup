@@ -7,28 +7,23 @@ Intel의, [CPU와 FPGA가 결합된 칩](https://www.nextplatform.com/2018/05/24
 
 시작하기 앞서, 몇몇 용어들을 확인하고 넘어가자.
 
+- HARP(Hardware Accelerator Research Program)
 - FPGA(Field-Programmable Gate Array)
 - AFU(Accelerator Functional Unit)
 - ASE(AFU Simulation Environment)
 - OPAE(Open Programmable Acceleration Engine)
+- OPAE SDK(Software Development Kit)
 - CCI-P(Core Cache Interface)
-- HARP(Hardware Accelerator Research Program)
+- BBBs(Basic Building Blocks)
+- RTL(Register Transfe Level)
+- Quartus
 
 
-
-
--
--
--
--
--
--
-
-## Configuring a build environment
+## 빌드 환경 설정(Configuring a build environment)
 
 먼저, 배정받은 서버(호스트 : ssh-iam.intel-research.net)에 ssh로 연결한다. FPGA를 사용하는 데 필요한 파일들은 /export/fpga 위치에 저장돼 있다.(OPAE 등)
 
-다음으로, 해당 FPGA class를 [이 표](https://wiki.intel-research.net/FPGA.html#id2)에서 찾아서, 다음 command의 \<fpga-class> 자리에 넣고 실행한다.
+다음으로, 해당 FPGA class를 [이 표](https://wiki.intel-research.net/FPGA.html#id2)에서 찾아서, 그 이름을 다음 command의 \<fpga-class> 자리에 넣고 실행한다. (6개의 class 중 hybrid chip에 해당하는 것은 4, 5, 6번이므로 이중 하나일 것이다.)
 
 ```shell
 source /export/fpga/bin/setup-fpga-env <fpga-class>
@@ -43,9 +38,9 @@ source /export/fpga/bin/setup-fpga-env <fpga-class>
 ```
 
 
-## Working with RTL
+## RTL 작업하기(Working with RTL)
 
-#### Synthesizing RTL designs
+#### RTL 디자인 합성하기(Synthesizing RTL designs)
 
 Quartus와 OPAE는 /export/fpga 에 이미 설치되어 있고, 위에서 setup-fpga-env 가 source 되었을 때 환경변수 PATH에 들어갔다.
 
