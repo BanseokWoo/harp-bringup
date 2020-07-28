@@ -5,7 +5,7 @@ Intel의, [CPU와 FPGA가 결합된 칩](https://www.nextplatform.com/2018/05/24
 
 > 이 튜토리얼은 intel의 [튜토리얼](https://wiki.intel-research.net/FPGA.html)에 기반해 작성됐다.
 
-시작하기 앞서, 몇몇 용어들을 확인하고 넘어가자.
+시작하기 앞서, 몇몇 약자들을 확인하고 넘어가자.
 
 - HARP(Hardware Accelerator Research Program)
 - FPGA(Field-Programmable Gate Array)
@@ -69,7 +69,7 @@ tail -f build.log
 
 
 
-#### Executing on FPGAs
+#### FPGA 상에서 실행하기(Executing on FPGAs)
 
 
 ```shell
@@ -88,10 +88,10 @@ make
 
 위와 같이, ``` qsub-fpga ```를 실행하면, FPGA를 사용할 수 있는 새로운 shell이 열리고, 이때 이 스크립트는 위에서 설정된 FPGA class를 고른다. 또, -V 옵션이 자동으로 qsub에 적용돼서, 기존의 환경 설정들도 모두 새로운 shell로 넘어간다.
 
-그리고 적절히 컴파일하고 실행하면, "Hello World!"라는 문구를 볼 수 있을 것이다.
+그리고 위와 같이 컴파일하고 실행하면, "Hello World!"라는 문구를 볼 수 있을 것이다.
 
 ``` qsub-fpga ```
-를 실행할 때마다 작업 directory가 바뀌는 것이 번거로우면, 다음 코드를 ~/.bashrc에 추가하고 ``` source ~/.bashrc ```를 shell에 실행시키면 새로운 shell도 같은 작업 directory에서 실행될 것이다.
+를 실행할 때마다 작업 directory가 바뀌는 것이 번거로우면, 다음 코드를 ~/.bashrc에 추가하고 ``` source ~/.bashrc ```를 shell에서 실행시키면 새로운 shell도 같은 작업 directory에서 실행될 것이다.
 
 ```shell
 if [ "$PBS_ENVIRONMENT" == "PBS_INTERACTIVE" ] && [ "$PBS_O_WORKDIR" != "" ] &&
@@ -109,15 +109,11 @@ fi
 
 
 
-#### Simulating designs with ASE
+#### ASE로 디자인을 시뮬레이션하기(Simulating designs with ASE)
 
 다음은, 같은 tutorial을 실행하되, ASE(AFU Simulation Environment)를 이용하여 RTL 시뮬레이션을 해보자.
 
-먼저, 다음 명령어를 shell에서 치자.
-
-```shell
-qsub-sim
-```
+다음을 실행시키면 시뮬레이션을 할 수 있다. 이때, 같은 조건의 shell이 두개 필요하므로 tmux를 사용해 shell을 나눴고, 이 과정에서 tmux 명령어들의 prefix인 ^b(ctrl + b)가 쓰인다.
 
 ```shell
 qsub-sim
@@ -142,4 +138,4 @@ with_ase ./cci_hello
 ```
 
 
-#### AAL legacy Software
+위와 같이 실행을 하면, 분리된 두 개의 shell에서 각각 RTL 시뮬레이션과 실제 소프트웨어 실행이 된다.
